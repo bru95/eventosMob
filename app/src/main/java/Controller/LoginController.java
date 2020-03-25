@@ -23,7 +23,7 @@ public class LoginController {
 
     public LoginController(Activity act) {
         this.act = act;
-        auth = new Auth(act);
+        auth = new Auth();
     }
 
     public void loginUsuario(String email, String senha) {
