@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CadastroEventoActivity"
+    tools:showIn="@layout/activity_cadastro_evento"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_nomeNovoEvento"
+            android:text="@string/nome"
+            android:textColor="@color/preto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_nomeNovoEvento"
+            android:layout_toRightOf="@id/tv_nomeNovoEvento"
+            android:textColor="@color/preto"
+            android:layout_alignBaseline="@id/tv_nomeNovoEvento"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_descricaoNovoEvento"
+            android:layout_below="@id/et_nomeNovoEvento"
+            android:layout_marginTop="10dp"
+            android:text="@string/descricao"
+            android:textColor="@color/preto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_descricaoNovoEvento"
+            android:layout_toRightOf="@id/tv_descricaoNovoEvento"
+            android:layout_alignBaseline="@id/tv_descricaoNovoEvento"
+            android:textColor="@color/preto"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_dataNovoEvento"
+            android:text="@string/Data"
+            android:layout_below="@id/et_descricaoNovoEvento"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/preto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_dataNovoEvento"
+            android:textColor="@color/preto"
+            android:layout_toRightOf="@id/tv_dataNovoEvento"
+            android:layout_alignBaseline="@id/tv_dataNovoEvento"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_valorNovoEvento"
+            android:text="@string/valor_ev"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/et_dataNovoEvento"
+            android:textColor="@color/preto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_valorNovoEvento"
+            android:textColor="@color/preto"
+            android:layout_toRightOf="@id/tv_valorNovoEvento"
+            android:layout_alignBaseline="@id/tv_valorNovoEvento"
+            android:inputType="numberDecimal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_vagasNovoEvento"
+            android:layout_below="@id/et_valorNovoEvento"
+            android:layout_marginTop="10dp"
+            android:text="@string/vagas"
+            android:textColor="@color/preto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_vagasNovoEvento"
+            android:layout_toRightOf="@id/tv_vagasNovoEvento"
+            android:layout_alignBaseline="@id/tv_vagasNovoEvento"
+            android:textColor="@color/preto"
+            android:inputType="number"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_localNovoEvento"
+            android:layout_marginTop="10dp"
+            android:text="@string/local"
+            android:textColor="@color/preto"
+            android:layout_below="@id/et_vagasNovoEvento"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_localNovoEvento"
+            android:layout_toRightOf="@id/tv_localNovoEvento"
+            android:layout_alignBaseline="@id/tv_localNovoEvento"
+            android:textColor="@color/preto"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/branco"
+            android:layout_below="@id/et_localNovoEvento"
+            android:onClick="cadastrarEvento"
+            android:text="@string/cadastrar"/>
+
+    </RelativeLayout>
+
+</ScrollView>

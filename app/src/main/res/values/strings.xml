@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">EventosMob</string>
+    <string name="action_login">Login</string>
+    <string name="action_logout">Logout</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_evento_detalhes">Detalhes</string>
+    <string name="title_activity_evento_admin">Eventos</string>
+    <string name="inscrever_se">Inscreva-se</string>
+    <string name="valor">Valor?</string>
+    <string name="onde">Onde?</string>
+    <string name="quando">Quando?</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="informe_email_senha">Por favor, informe email e senha</string>
+    <string name="title_activity_cadastro_evento">Novo Evento</string>
+    <string name="nome">Nome do evento</string>
+    <string name="descricao">Descrição</string>
+    <string name="local">Local</string>
+    <string name="Data">Data</string>
+    <string name="vagas">Vagas</string>
+    <string name="valor_ev">Valor</string>
+    <string name="cadastrar">Cadastrar</string>
+</resources>

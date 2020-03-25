@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "938277440091",
+    "firebase_url": "https://trabalho-android-upf.firebaseio.com",
+    "project_id": "trabalho-android-upf",
+    "storage_bucket": "trabalho-android-upf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938277440091:android:ed76a5ab3daa0548d24d7e",
+        "android_client_info": {
+          "package_name": "com.example.trabalhodesandroidupf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938277440091-o7s5831r29mbbv82d854fsu1u629l598.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvwEhqrWGEHH7MCPjFs15CNvJM3AmHmHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938277440091-o7s5831r29mbbv82d854fsu1u629l598.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
