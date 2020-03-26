@@ -1,10 +1,12 @@
 package Adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.trabalhodesandroidupf.R;
@@ -85,8 +87,15 @@ public class adapterListaParticipantes extends BaseExpandableListAdapter {
         }
 
         TextView tvGrupo = (TextView) convertView.findViewById(R.id.tv_titleParticipante);
+        ImageView indicator = (ImageView) convertView.findViewById(R.id.indicator_group);
 
         tvGrupo.setText((String) getGroup(groupPosition));
+
+        if (isExpanded) {
+            indicator.setImageResource(R.drawable.ic_up);
+        } else {
+            indicator.setImageResource(R.drawable.ic_down);
+        }
 
         return convertView;
     }
