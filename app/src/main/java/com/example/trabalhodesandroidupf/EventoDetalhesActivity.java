@@ -20,7 +20,6 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class EventoDetalhesActivity extends AppCompatActivity {
 
-    private Evento evento;
     private EventoDetalhesController controller;
 
     @Override
@@ -33,13 +32,15 @@ public class EventoDetalhesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        controller = new EventoDetalhesController(this);
-
         Bundle extra = getIntent().getExtras();
+        Evento evento = null;
         if (extra != null) {
-            this.evento = (Evento) getIntent()
+            evento = (Evento) getIntent()
                     .getSerializableExtra("evento");
         }
+
+
+        controller = new EventoDetalhesController(this, evento);
 
         mostraInfoEvento();
     }
@@ -56,6 +57,7 @@ public class EventoDetalhesActivity extends AppCompatActivity {
     }
 
     private void mostraInfoEvento() {
+        Evento evento = controller.getEvento();
         if(evento != null) {
             TextView nome = findViewById(R.id.tv_eventoDetalhes);
             nome.setText(evento.getNome());
@@ -129,7 +131,7 @@ public class EventoDetalhesActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
         pDialog.show();
 
-        controller.insereParticipante(evento, nome, email);
+        controller.insereParticipante(controller.getEvento(), nome, email);
 
         pDialog.dismiss();
 

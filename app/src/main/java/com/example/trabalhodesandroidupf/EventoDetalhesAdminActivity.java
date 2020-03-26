@@ -32,7 +32,6 @@ public class EventoDetalhesAdminActivity extends AppCompatActivity {
     private TextView tv_local;
     private TextView tv_valor;
     private TextView tv_vagas;
-    private Evento evento;
     private EventoDetalhesAdminController controller;
 
     @Override
@@ -53,13 +52,14 @@ public class EventoDetalhesAdminActivity extends AppCompatActivity {
         tv_valor = findViewById(R.id.tv_valorDetalhesAdmin);
         tv_vagas = findViewById(R.id.tv_vagasDetalhesAdmin);
 
-        controller = new EventoDetalhesAdminController(this);
 
         Bundle extra = getIntent().getExtras();
+        Evento evento = null;
         if (extra != null) {
-            this.evento = (Evento) getIntent()
+            evento = (Evento) getIntent()
                     .getSerializableExtra("evento");
         }
+        controller = new EventoDetalhesAdminController(this, evento);
     }
 
     @Override
@@ -74,6 +74,8 @@ public class EventoDetalhesAdminActivity extends AppCompatActivity {
     }
 
     private void mostraInfoEvento() {
+
+        Evento evento = controller.getEvento();
 
         tv_nome.setText(evento.getNome());
         tv_descricao.setText(evento.getDescricao());
@@ -99,13 +101,13 @@ public class EventoDetalhesAdminActivity extends AppCompatActivity {
     }
 
     public void excluirEvento(View view) {
-        controller.removerEvento(evento);
+        controller.removerEvento();
         finish();
     }
 
     public void editarEvento(View view) {
         Intent intent = new Intent(this, CadastroEventoActivity.class);
-        intent.putExtra("evento", evento);
+        intent.putExtra("evento", controller.getEvento());
         startActivity(intent);
         finish();
     }

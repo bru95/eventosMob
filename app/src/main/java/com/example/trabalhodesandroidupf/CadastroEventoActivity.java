@@ -26,8 +26,6 @@ public class CadastroEventoActivity extends AppCompatActivity {
 
     private CadastroEventoController controller;
 
-    private Evento eventoEdit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +59,14 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String vagas = vagasEvento.getText().toString();
         String local = localEvento.getText().toString();
 
-        controller.salvarEvento(nome, descricao, data, Double.valueOf(valor), Integer.valueOf(vagas), local);
-        finish();
+        if(!nome.isEmpty() && !descricao.isEmpty() && !data.isEmpty() && !valor.isEmpty() && !vagas.isEmpty() && !local.isEmpty()) {
+            controller.salvarEvento(nome, descricao, data, Double.valueOf(valor), Integer.valueOf(vagas), local);
+            finish();
+        } else {
+            Snackbar.make(view, getString(R.string.informe_todos_dados), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
+
     }
 
     private void preencheForm(Evento evento) {

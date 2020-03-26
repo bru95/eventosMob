@@ -100,7 +100,7 @@ public class Evento implements Serializable {
 
     public boolean procuraParticipante(Participante p) {
         for(int i = 0; i < participantes.size(); i++) {
-            if(p.getEmail().equals(participantes.get(i).getEmail())){
+            if(participantes.get(i) != null && p.getEmail().equals(participantes.get(i).getEmail())){
                 return true;
             }
         }

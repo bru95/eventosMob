@@ -24,7 +24,7 @@ public class EventoRepository {
     }
 
     public void getTodosEventos(final callbackEvento callBack) {
-        eventoReferencia.addListenerForSingleValueEvent(new ValueEventListener() {
+        eventoReferencia.orderByChild("nome").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<Evento> eventos = new ArrayList<>();

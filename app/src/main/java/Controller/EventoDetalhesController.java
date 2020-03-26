@@ -10,9 +10,11 @@ import Utils.sharedPreferencesController;
 public class EventoDetalhesController {
 
     private Context ctx;
+    private Evento evento;
 
-    public EventoDetalhesController(Context ctx) {
+    public EventoDetalhesController(Context ctx, Evento evento) {
         this.ctx = ctx;
+        this.evento = evento;
     }
 
 
@@ -25,5 +27,9 @@ public class EventoDetalhesController {
         EventoRepository db = new EventoRepository();
         db.updateEvento(ev);
 
+    }
+
+    public Evento getEvento() {
+        return this.evento;
     }
 }
