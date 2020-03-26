@@ -13,7 +13,7 @@
     <string name="senha">Senha</string>
     <string name="login">Login</string>
     <string name="informe_email_senha">Por favor, informe email e senha</string>
-    <string name="title_activity_cadastro_evento">Novo Evento</string>
+    <string name="title_activity_cadastro_evento">Cadastrar/Editar Evento</string>
     <string name="nome">Nome do evento</string>
     <string name="descricao">Descrição</string>
     <string name="local">Local</string>
@@ -29,4 +29,5 @@
     <string name="title_activity_evento_detalhes_admin">Detalhes</string>
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
+    <string name="salvar">Salvar</string>
 </resources>

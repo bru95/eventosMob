@@ -82,6 +82,7 @@
             android:id="@+id/bt_editEventoAdmin"
             android:textColor="@color/branco"
             android:background="@color/laranja"
+            android:onClick="editarEvento"
             android:layout_marginRight="3dp"
             android:text="@string/editar"/>
 

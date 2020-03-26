@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import Controller.CadastroEventoController;
+import Model.Evento;
 
 public class CadastroEventoActivity extends AppCompatActivity {
 
@@ -24,6 +26,8 @@ public class CadastroEventoActivity extends AppCompatActivity {
 
     private CadastroEventoController controller;
 
+    private Evento eventoEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +35,14 @@ public class CadastroEventoActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        controller = new CadastroEventoController();
+        Evento evento = null;
+        Bundle extra = getIntent().getExtras();
+        if (extra != null) {
+            evento = (Evento) getIntent()
+                    .getSerializableExtra("evento");
+        }
+
+        controller = new CadastroEventoController(evento);
 
         nomeEvento = findViewById(R.id.et_nomeNovoEvento);
         descEvento = findViewById(R.id.et_descricaoNovoEvento);
@@ -50,7 +61,27 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String vagas = vagasEvento.getText().toString();
         String local = localEvento.getText().toString();
 
-        controller.novoEvento(nome, descricao, data, Double.valueOf(valor), Integer.valueOf(vagas), local);
+        controller.salvarEvento(nome, descricao, data, Double.valueOf(valor), Integer.valueOf(vagas), local);
+        finish();
     }
 
+    private void preencheForm(Evento evento) {
+        nomeEvento.setText(evento.getNome());
+        descEvento.setText(evento.getDescricao());
+        dataEvento.setText(evento.getData());
+        valorEvento.setText(String.valueOf(evento.getValor()));
+        vagasEvento.setText(String.valueOf(evento.getVagas()));
+        localEvento.setText(evento.getLocal());
+
+        Button bt_edit = findViewById(R.id.bt_salvarEvento);
+        bt_edit.setText(R.string.salvar);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (controller.getEventoEdit() != null) {
+            preencheForm(controller.getEventoEdit());
+        }
+    }
 }

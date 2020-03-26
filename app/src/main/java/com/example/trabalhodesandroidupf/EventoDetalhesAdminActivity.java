@@ -1,5 +1,6 @@
 package com.example.trabalhodesandroidupf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -99,6 +100,13 @@ public class EventoDetalhesAdminActivity extends AppCompatActivity {
 
     public void excluirEvento(View view) {
         controller.removerEvento(evento);
+        finish();
+    }
+
+    public void editarEvento(View view) {
+        Intent intent = new Intent(this, CadastroEventoActivity.class);
+        intent.putExtra("evento", evento);
+        startActivity(intent);
         finish();
     }
 }
