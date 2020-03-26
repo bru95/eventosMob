@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import DAO.EventoRepository;
+import DAO.callbackEvento;
 import Model.Evento;
 
 public class MainController {
@@ -23,9 +24,9 @@ public class MainController {
         this.act = act;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public void getEventos(callbackEvento callbackEvento) {
         EventoRepository db = new EventoRepository();
-        return db.getTodosEventos();
+        db.getTodosEventos(callbackEvento);
     }
 
     public void maisDetalhesEvento(Evento evento) {

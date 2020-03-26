@@ -1,5 +1,13 @@
 package DAO;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,46 +17,42 @@ import Model.Evento;
 
 public class EventoRepository {
 
-    private  ArrayList<Evento> eventos;
+    private DatabaseReference eventoReferencia;
 
     public EventoRepository() {
-        eventos = new ArrayList<>();
+        eventoReferencia = FirebaseDatabase.getInstance().getReference("evento");
     }
 
-    public ArrayList<Evento> getTodosEventos() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
+    public void getTodosEventos(final callbackEvento callBack) {
+        eventoReferencia.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Evento> eventos = new ArrayList<>();
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Evento e = postSnapshot.getValue(Evento.class);
+                    eventos.add(e);
+                }
+                callBack.onAllEventscallback(eventos);
+            }
 
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        eventos.add(new Evento("Tchê Linux", "Evento para os gaúchos que querem saber tudo sobre o Linux!", dateFormat.format(date), 200.00, 100, "Porto Alegre/RS"));
-        eventos.add(new Evento("SBSeg", "Simpósio Brasileiro de Segurança da informação", dateFormat.format(date), 300.00, 200, "Florianópolis/SC"));
-        eventos.add(new Evento("SulPET", "Encontro dos grupos PET da região sul.", dateFormat.format(date), 80.00, 500, "Santa Maria/RS"));
-        return eventos;
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    public ArrayList<Evento> addEvento(Evento evento) {
-        eventos.add(evento);
-        return eventos;
+    public void addEvento(Evento evento) {
+        eventoReferencia.child(evento.getId()).setValue(evento);
+    }
+
+
+    public void updateEvento(Evento evento) {
+        eventoReferencia.child(evento.getId()).setValue(evento);
+    }
+
+    public void deleteEvento(Evento evento) {
+        eventoReferencia.child(evento.getId()).removeValue();
     }
 
 

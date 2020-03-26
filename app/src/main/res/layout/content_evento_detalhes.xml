@@ -36,6 +36,13 @@
         android:layout_below="@id/tv_descricaoDetalhes"
         android:layout_marginTop="15dp">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_data"
+            android:id="@+id/iv_quando"/>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,7 +54,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:id="@+id/tv_dataDetalhes"
             android:textColor="@color/colorAccent"/>
 
@@ -62,6 +69,13 @@
         android:layout_below="@id/layout_data"
         android:layout_marginTop="15dp">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_local"
+            android:id="@+id/iv_onde"/>
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,7 +87,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:id="@+id/tv_localDetalhes"
             android:textColor="@color/colorAccent"/>
 
@@ -114,15 +128,25 @@
         android:layout_below="@id/layout_valor"
         android:layout_marginTop="15dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_inscrito"
+        android:text="@string/inscrito"
+        android:layout_below="@id/tv_vagasDetalhes"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary" />
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bt_inscrever"
+        android:id="@+id/bt_participar"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:textColor="@color/branco"
         android:layout_marginBottom="10dp"
-        android:text="@string/inscrever_se"/>
+        android:onClick="openDialogInscreva_se"
+        android:text="@string/quero_participar"/>
 
 </RelativeLayout>

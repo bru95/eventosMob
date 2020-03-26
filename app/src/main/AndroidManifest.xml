@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.trabalhodesandroidupf">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +14,13 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
+            android:name=".EventoDetalhesAdminActivity"
+            android:label="@string/title_activity_evento_detalhes_admin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".CadastroEventoActivity"
             android:label="@string/title_activity_cadastro_evento"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"

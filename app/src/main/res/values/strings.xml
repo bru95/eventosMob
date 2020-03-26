@@ -21,4 +21,12 @@
     <string name="vagas">Vagas</string>
     <string name="valor_ev">Valor</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="login_incorreto">Usuário ou senha incorreto</string>
+    <string name="quero_participar">Quero participar!</string>
+    <string name="nome_participante">Nome</string>
+    <string name="title_dialog">Preencha o formulário para continuar</string>
+    <string name="inscrito">Você está inscrito nesse evento!</string>
+    <string name="title_activity_evento_detalhes_admin">Detalhes</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
 </resources>

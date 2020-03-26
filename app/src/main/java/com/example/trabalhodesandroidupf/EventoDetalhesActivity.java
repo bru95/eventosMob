@@ -1,22 +1,27 @@
 package com.example.trabalhodesandroidupf;
 
+import android.app.Dialog;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import Controller.EventoDetalhesController;
 import Model.Evento;
+import Model.Participante;
+import Utils.sharedPreferencesController;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class EventoDetalhesActivity extends AppCompatActivity {
 
     private Evento evento;
+    private EventoDetalhesController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,8 @@ public class EventoDetalhesActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        controller = new EventoDetalhesController(this);
 
         Bundle extra = getIntent().getExtras();
         if (extra != null) {
@@ -66,8 +73,73 @@ public class EventoDetalhesActivity extends AppCompatActivity {
             valor.setText("R$" + evento.getValor());
 
             TextView vagas = findViewById(R.id.tv_vagasDetalhes);
-            vagas.setText(evento.getVagas() + " vagas restantes");
+            vagas.setText((evento.getVagas() - evento.getParticipantes().size()) + " vagas restantes");
+
+            if(evento.getVagas() - evento.getParticipantes().size() == 0) {
+                Button bt_participar = findViewById(R.id.bt_participar);
+                bt_participar.setEnabled(false);
+            }
+
+            sharedPreferencesController shared = new sharedPreferencesController(this);
+            Participante previous = shared.getInfoParticipante();
+            TextView inscrito = findViewById(R.id.tv_inscrito);
+            if(evento.procuraParticipante(previous)) {
+                inscrito.setVisibility(View.VISIBLE);
+            } else {
+                inscrito.setVisibility(View.GONE);
+            }
         }
+    }
+
+    public void openDialogInscreva_se(final View view) {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_inscricao);
+        dialog.setTitle("Preencha o formulário");
+
+        final EditText et_nome = dialog.findViewById(R.id.et_nomeParticipante);
+        final EditText et_email = dialog.findViewById(R.id.et_emailParticipante);
+
+        sharedPreferencesController shared = new sharedPreferencesController(this);
+        Participante previous = shared.getInfoParticipante();
+        et_nome.setText(previous.getNome());
+        et_email.setText(previous.getEmail());
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.bt_inscrever);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String nome = et_nome.getText().toString();
+                String email = et_email.getText().toString();
+
+                if(!nome.isEmpty() && !email.isEmpty()) {
+                    dialog.dismiss();
+                    novoParticipante(nome, email);
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void novoParticipante(String nome, String email) {
+        SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(R.color.colorPrimaryDark);
+        pDialog.setTitleText("Carregando ...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        controller.insereParticipante(evento, nome, email);
+
+        pDialog.dismiss();
+
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Parabéns!")
+                .setContentText("Você está inscrito neste evento.")
+                .show();
+
+        mostraInfoEvento();
+
     }
 
 }

@@ -5,4 +5,6 @@
     <color name="colorAccent">#767676</color>
     <color name="branco">#FFFFFF</color>
     <color name="preto">#000000</color>
+    <color name="laranja">#FFA500</color>
+    <color name="vermelho">#B22222</color>
 </resources>

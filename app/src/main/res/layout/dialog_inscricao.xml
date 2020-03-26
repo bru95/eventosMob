@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_title_dialog"
+        android:text="@string/title_dialog"
+        android:fontFamily="@font/lobster_two"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_nomeParticipante"
+        android:text="@string/nome_participante"
+        android:layout_below="@id/tv_title_dialog"
+        android:textColor="@color/preto"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_nomeParticipante"
+        android:layout_toRightOf="@id/tv_nomeParticipante"
+        android:layout_alignBaseline="@id/tv_nomeParticipante"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_emailParticipante"
+        android:text="@string/email"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/et_nomeParticipante"
+        android:textColor="@color/preto"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_emailParticipante"
+        android:layout_toRightOf="@id/tv_emailParticipante"
+        android:layout_alignBaseline="@id/tv_emailParticipante"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_inscrever"
+        android:layout_below="@id/et_emailParticipante"
+        android:layout_marginTop="25dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/branco"
+        android:text="@string/inscrever_se"/>
+
+</RelativeLayout>

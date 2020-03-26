@@ -8,13 +8,16 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.trabalhodesandroidupf.MainActivity;
+import com.example.trabalhodesandroidupf.R;
 import com.example.trabalhodesandroidupf.SplashActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import DAO.Auth;
+import DAO.callbackLogin;
 import Utils.sharedPreferencesController;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginController {
 
@@ -26,9 +29,8 @@ public class LoginController {
         auth = new Auth();
     }
 
-    public void loginUsuario(String email, String senha) {
+    public void loginUsuario(String email, String senha, final callbackLogin callbackLogin) {
         Task<AuthResult> task = auth.login(email, senha);
-        Log.w("teste", String.valueOf(auth.verificaUsrLogado()));
         task.addOnCompleteListener(act, new OnCompleteListener<AuthResult>()
         {
             @Override
@@ -38,25 +40,12 @@ public class LoginController {
 
                 if (task.isSuccessful()) {
                     sharedPreference.setUsrLogado(true);
-                    startSplashActivity();
+                    callbackLogin.onLogin(true);
                 } else { //erro
                     sharedPreference.setUsrLogado(false);
+                    callbackLogin.onLogin(false);
                 }
             }
         });
-    }
-
-    public void startMainActivity(){
-        Context ctx = act.getApplicationContext();
-        Intent intent = new Intent(ctx, MainActivity.class);
-        ctx.startActivity(intent);
-        this.act.finish();
-    }
-
-    public void startSplashActivity(){
-        Context ctx = act.getApplicationContext();
-        Intent intent = new Intent(ctx, SplashActivity.class);
-        ctx.startActivity(intent);
-        this.act.finish();
     }
 }

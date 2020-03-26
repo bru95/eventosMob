@@ -1,5 +1,6 @@
 package com.example.trabalhodesandroidupf;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,8 +18,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import Adapter.adapterGridEventos;
+import Adapter.adapterListaEventos;
 import Controller.EventoAdminController;
+import DAO.callbackEvento;
 import Model.Evento;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class EventoAdminActivity extends AppCompatActivity {
 
@@ -42,8 +46,6 @@ public class EventoAdminActivity extends AppCompatActivity {
                 controller.startCadastroEventoActivity();
             }
         });
-
-        mostraEventosAdmin();
     }
 
     @Override
@@ -70,10 +72,31 @@ public class EventoAdminActivity extends AppCompatActivity {
     }
 
     private void mostraEventosAdmin() {
-        ArrayList<Evento> eventos = controller.getTodosEventosAdmin();
+        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(R.color.colorPrimaryDark);
+        pDialog.setTitleText("Carregando ...");
+        pDialog.setCancelable(false);
+        pDialog.show();
 
-        adapterGridEventos adapter = new adapterGridEventos(this, R.layout.item_evento_admin, eventos);
-        gv_eventos.setAdapter(adapter);
+        controller.getTodosEventosAdmin(new callbackEvento() {
+            @Override
+            public void onAllEventscallback(ArrayList<Evento> eventos) {
+                adapterGridEventos adapter = new adapterGridEventos(EventoAdminActivity.this, R.layout.item_evento_admin, eventos);
+                gv_eventos.setAdapter(adapter);
+                pDialog.dismiss();
+            }
+        });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mostraEventosAdmin();
+    }
+
+    public void startDetalhesAdminActivity(Evento evento) {
+        Intent intent = new Intent(this, EventoDetalhesAdminActivity.class);
+        intent.putExtra("evento", evento);
+        startActivity(intent);
+    }
 }

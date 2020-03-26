@@ -2,8 +2,6 @@ package com.example.trabalhodesandroidupf;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,7 +19,9 @@ import java.util.Date;
 
 import Adapter.adapterListaEventos;
 import Controller.MainController;
+import DAO.callbackEvento;
 import Model.Evento;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,25 +37,18 @@ public class MainActivity extends AppCompatActivity {
 
         lista = findViewById(R.id.lv_eventos);
         controller = new MainController(this);
-
-        mostraEventos();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
             controller.loginActivity();
             return true;
@@ -65,13 +58,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void mostraEventos() {
-        ArrayList<Evento> eventos = controller.getEventos();
+        final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(R.color.colorPrimaryDark);
+        pDialog.setTitleText("Carregando ...");
+        pDialog.setCancelable(false);
+        pDialog.show();
 
-        adapterListaEventos adapter = new adapterListaEventos(this, eventos);
-        this.lista.setAdapter(adapter);
+        controller.getEventos(new callbackEvento() {
+            @Override
+            public void onAllEventscallback(ArrayList<Evento> evs) {
+                adapterListaEventos adapter = new adapterListaEventos(MainActivity.this, evs);
+                lista.setAdapter(adapter);
+                pDialog.dismiss();
+            }
+        });
     }
 
     public void abreDetalhesEvento(Evento evento) {
         controller.maisDetalhesEvento(evento);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mostraEventos();
     }
 }

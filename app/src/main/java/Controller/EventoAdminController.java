@@ -10,6 +10,7 @@ import com.example.trabalhodesandroidupf.SplashActivity;
 import java.util.ArrayList;
 
 import DAO.EventoRepository;
+import DAO.callbackEvento;
 import Model.Evento;
 import Utils.sharedPreferencesController;
 
@@ -35,9 +36,9 @@ public class EventoAdminController {
         this.act.finish();
     }
 
-    public ArrayList<Evento> getTodosEventosAdmin() {
+    public void getTodosEventosAdmin(callbackEvento callbackEvento) {
         EventoRepository db = new EventoRepository();
-        return db.getTodosEventos();
+        db.getTodosEventos(callbackEvento);
     }
 
     public void startCadastroEventoActivity(){

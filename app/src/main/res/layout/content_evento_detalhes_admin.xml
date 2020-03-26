@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".EventoDetalhesAdminActivity"
+    tools:showIn="@layout/activity_evento_detalhes_admin"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_eventoDetalhesAdmin"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/preto"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/lobster_two"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_descricaoDetalhesAdmin"
+        android:layout_below="@id/tv_eventoDetalhesAdmin"
+        android:textColor="@color/colorAccent"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_dataDetalhesAdmin"
+        android:textStyle="bold"
+        android:layout_below="@id/tv_descricaoDetalhesAdmin"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_localDetalhesAdmin"
+        android:textStyle="bold"
+        android:layout_below="@id/tv_dataDetalhesAdmin"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_valorDetalhesAdmin"
+        android:layout_below="@id/tv_localDetalhesAdmin"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_vagasDetalhesAdmin"
+        android:layout_below="@id/tv_valorDetalhesAdmin"
+        android:textColor="@color/colorAccent"/>
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/elv_participantes"
+        android:layout_below="@id/tv_vagasDetalhesAdmin"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_actionEventoAdmin"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="10">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_editEventoAdmin"
+            android:textColor="@color/branco"
+            android:background="@color/laranja"
+            android:layout_marginRight="3dp"
+            android:text="@string/editar"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="wrap_content"
+            android:id="@+id/bt_excluirEventoAdmin"
+            android:background="@color/vermelho"
+            android:onClick="excluirEvento"
+            android:layout_marginLeft="3dp"
+            android:text="@string/excluir"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.trabalhodesandroidupf.EventoAdminActivity;
+import com.example.trabalhodesandroidupf.MainActivity;
 import com.example.trabalhodesandroidupf.R;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class adapterGridEventos extends ArrayAdapter<Evento> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         View row = convertView;
         RecordHolder holder = null;
 
@@ -46,10 +48,19 @@ public class adapterGridEventos extends ArrayAdapter<Evento> {
             holder = (RecordHolder) row.getTag();
         }
 
-        Evento item = data.get(position);
+        final Evento item = data.get(position);
         holder.nomeEv.setText(item.getNome());
         holder.dataEv.setText(item.getData());
         holder.localEv.setText(item.getLocal());
+
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (context instanceof EventoAdminActivity) {
+                    ((EventoAdminActivity)context).startDetalhesAdminActivity(item);
+                }
+            }
+        });
         return row;
 
     }

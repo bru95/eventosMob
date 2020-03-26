@@ -10,12 +10,15 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import Controller.LoginController;
+import DAO.callbackLogin;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,23 +53,54 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void mainActivity(){
-        controller.startMainActivity();
+        startMainActivity();
     }
 
     @Override
     public void onBackPressed() {
-        controller.startMainActivity();
+        startMainActivity();
     }
 
-    public void getInfoLogin(View view) {
+    public void getInfoLogin(final View view) {
         String email = et_email.getText().toString();
         String senha = et_senha.getText().toString();
 
         if(!email.isEmpty() && !senha.isEmpty()) {
-            controller.loginUsuario(email, senha);
+
+            final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(R.color.colorPrimaryDark);
+            pDialog.setTitleText("Carregando ...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+            controller.loginUsuario(email, senha, new callbackLogin() {
+                @Override
+                public void onLogin(Boolean result) {
+                    pDialog.dismiss();
+                    if (result) {
+                        startSplashActivity();
+                    } else {
+                        Snackbar.make(view, getString(R.string.login_incorreto), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                }
+            });
         } else {
             Snackbar.make(view, getString(R.string.informe_email_senha), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
+    }
+
+    private void startSplashActivity(){
+        Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void startMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
